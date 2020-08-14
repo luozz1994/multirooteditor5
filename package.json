@@ -1,0 +1,35 @@
+{
+  "name": "multirooteditor5",
+  "version": "1.0.0",
+  "description": "基于ckeditor5的多根编辑器",
+  "main": "src/index.js",
+  "private": false,
+  "keywords": [
+    "editor",
+    "ckeditor5",
+    "multirooteditor",
+    "multirooteditor5",
+    "多根节点编辑器",
+    "编辑器"
+  ],
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/luozz1994/multirooteditor5.git"
+  },
+  "author": "luozz1994",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/luozz1994/multirooteditor5/issues"
+  },
+  "homepage": "https://github.com/luozz1994/multirooteditor5#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "@ckeditor/ckeditor5-core": "^21.0.0",
+    "@ckeditor/ckeditor5-dev-utils": "^23.1.1",
+    "@ckeditor/ckeditor5-engine": "^21.0.0",
+    "@ckeditor/ckeditor5-theme-lark": "^21.0.0",
+    "@ckeditor/ckeditor5-ui": "^21.0.0",
+    "@ckeditor/ckeditor5-utils": "^21.0.0"
+  }
+}

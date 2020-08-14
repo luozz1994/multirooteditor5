@@ -1,0 +1,13 @@
+.DS_*
+*.log
+logs
+**/*.backup.*
+**/*.back.*
+.idea
+.vscode
+package-lock.json
+
+lib
+node_modules
+
+*.sublime*
