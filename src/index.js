@@ -6,7 +6,7 @@ import setDataInElement from '@ckeditor/ckeditor5-utils/src/dom/setdatainelement
 import MultoRootEditorUI from './ui';
 import MultoRootEditorUIView from './uiview';
 export default class MultiRootEditor extends Editor {
-	constructor(sourceElements, config) {
+	constructor(sourceElements = {}, config) {
 		super();
 		this.data.processor = new HtmlDataProcessor(this.data.viewDocument);
 		const availablePlugins = Array.from(
@@ -38,7 +38,7 @@ export default class MultiRootEditor extends Editor {
 	destroy() {
 		const data = {};
 		const editables = {};
-		const editablesNames = Array.from(this.ui.getEditableElementsNames());
+		const editablesNames = Object.keys(this.sourceElements);
 
 		for (const rootName of editablesNames) {
 			data[rootName] = this.getData(rootName);
