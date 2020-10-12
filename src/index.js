@@ -9,9 +9,7 @@ export default class MultiRootEditor extends Editor {
 	constructor(sourceElements = {}, config) {
 		super();
 		this.data.processor = new HtmlDataProcessor(this.data.viewDocument);
-		const availablePlugins = Array.from(
-			this.constructor.builtinPlugins || []
-		);
+		const availablePlugins = Array.from(this.constructor.builtinPlugins || []);
 		this.config = new Config(config, this.constructor.defaultConfig);
 		this.config.define('plugins', availablePlugins);
 		this.sourceElements = sourceElements; //保存渲染的DOM到实例上，方便add和get等操作
@@ -23,11 +21,7 @@ export default class MultiRootEditor extends Editor {
 
 		this.ui = new MultoRootEditorUI(
 			this,
-			new MultoRootEditorUIView(
-				this.locale,
-				this.editing.view,
-				sourceElements
-			)
+			new MultoRootEditorUIView(this.locale, this.editing.view, sourceElements)
 		);
 		this.componentFactory = this.ui.componentFactory; //add时UI实例无法获取到该已初始化参数，特保存一份到实例上
 	}
@@ -67,9 +61,7 @@ export default class MultiRootEditor extends Editor {
 
 						// Create initial data object containing data from all roots.
 						for (const rootName of Object.keys(sourceElements)) {
-							initialData[rootName] = getDataFromElement(
-								sourceElements[rootName]
-							);
+							initialData[rootName] = getDataFromElement(sourceElements[rootName]);
 						}
 
 						editor.data.init(initialData);
@@ -89,9 +81,7 @@ export default class MultiRootEditor extends Editor {
 		const editable = this.ui.getEditableElement(rootName);
 		const data = this.getData(rootName);
 		delete this.sourceElements[rootName];
-		let removeRoot = this.model.document.roots.find(
-			(item) => item.rootName === rootName
-		);
+		let removeRoot = this.model.document.roots.find((item) => item.rootName === rootName);
 		this.ui.remove(rootName, this);
 		this.model.document.roots.remove(removeRoot);
 		setDataInElement(editable, data);
@@ -106,29 +96,19 @@ export default class MultiRootEditor extends Editor {
 	 * @return {Object} 当前实例editor
 	 */
 	add(sourceElements) {
-		this.sourceElements = Object.assign(
-			{},
-			this.sourceElements,
-			sourceElements
-		);
+		this.sourceElements = Object.assign({}, this.sourceElements, sourceElements);
 		for (const rootName of Object.keys(sourceElements)) {
 			this.model.document.createRoot('$root', rootName);
 		}
 		this.ui.add(sourceElements, this);
 		const initialData = {};
 		for (const rootName of Object.keys(sourceElements)) {
-			initialData[rootName] = getDataFromElement(
-				sourceElements[rootName]
-			);
+			initialData[rootName] = getDataFromElement(sourceElements[rootName]);
 		}
 		this.model.enqueueChange('transparent', (writer) => {
 			for (const rootName of Object.keys(initialData)) {
 				const modelRoot = this.model.document.getRoot(rootName);
-				writer.insert(
-					this._parse(initialData[rootName], modelRoot),
-					modelRoot,
-					0
-				);
+				writer.insert(this._parse(initialData[rootName], modelRoot), modelRoot, 0);
 			}
 		});
 		return this;
@@ -204,7 +184,7 @@ export default class MultiRootEditor extends Editor {
 			//表示获取全部
 			for (const rootName of Object.keys(this.sourceElements)) {
 				results[rootName] = this.data.get({
-					rootName,
+					rootName
 				});
 			}
 			return results;
@@ -214,13 +194,13 @@ export default class MultiRootEditor extends Editor {
 			//获取指定节点数组数据
 			for (const rootName of keys) {
 				results[rootName] = this.data.get({
-					rootName,
+					rootName
 				});
 			}
 			return results;
 		}
 		return this.data.get({
-			rootName: keys,
+			rootName: keys
 		});
 	}
 
